@@ -47,10 +47,10 @@ def doAddingTest():
 
 if __name__ == '__main__':
     #1
-    makingModelH5()
+    # makingModelH5()
 
     #2
-    #makingCover()
+    makingCover()
 
     #3
     # adding test
