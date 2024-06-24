@@ -1,61 +1,125 @@
 from PIL import Image, ImageDraw, ImageFont
 
 def drawImagewithText(strList):
-    # ÀÌ¹ÌÁö ¿­±â
-    image = Image.open('styleTransfer/styled_result_image1.jpg')
-    
-    # ÀÌ¹ÌÁö¿¡ ÅØ½ºÆ® Ãß°¡
-    draw = ImageDraw.Draw(image)
-    text = ""
-    for ch in strList:
-        text += ch
-    font = ImageFont.truetype("arial.ttf", 36)  # ÆùÆ®¿Í Å©±â ¼³Á¤
-    draw.text((50, 50), text, fill='white', font=font)  # ÅØ½ºÆ® À§Ä¡¿Í ½ºÅ¸ÀÏ ¼³Á¤
-    
-    # ¼öÁ¤µÈ ÀÌ¹ÌÁö ÀúÀå
-    image.save('newCoverPage/result1.jpg')
+    # ì›ë³¸ ì´ë¯¸ì§€ ë¶ˆëŸ¬ì˜¤ê¸°
+    style_image = Image.open('styleTransfer/styled_result_image1.jpg')
+
+    # í°ìƒ‰ ë°°ê²½ ì´ë¯¸ì§€ ìƒì„± (300x1500)
+    background_width = 1500
+    background_height = 300
+    background = Image.new('RGB', (background_width, background_height), 'white')
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ í¬ê¸°
+    style_image_width, style_image_height = style_image.size
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ ìœ„ì¹˜ (ì¢Œì¸¡ ì¤‘ì•™ì— ë°°ì¹˜)
+    # position = (0, (background_height - style_image_height) // 2)
+    position = (10, 10)
+    background.paste(style_image, position)
+
+    # í…ìŠ¤íŠ¸ ì¶”ê°€
+    draw = ImageDraw.Draw(background)
+    text = "".join(strList)
+    font = ImageFont.truetype("arial.ttf", 36)  # í°íŠ¸ í¬ê¸° ì¡°ì ˆ
+
+    # í…ìŠ¤íŠ¸ í¬ê¸° ê³„ì‚°
+    text_bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+    text_position = (style_image_width + 50, (background_height - text_height) // 2)
+    draw.text(text_position, text, fill='black', font=font)  # í°ìƒ‰ ë°°ê²½ì´ë¯€ë¡œ ê²€ì€ìƒ‰ í…ìŠ¤íŠ¸ ì‚¬ìš©
+
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ íŒŒì¼ë¡œ ì €ì¥
+    background.save('newCoverPage/result1.jpg')
+    ################################
+
+    style_image = Image.open('styleTransfer/styled_result_image2.jpg')
+
+    # í°ìƒ‰ ë°°ê²½ ì´ë¯¸ì§€ ìƒì„± (300x1500)
+    background_width = 1500
+    background_height = 300
+    background = Image.new('RGB', (background_width, background_height), 'white')
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ í¬ê¸°
+    style_image_width, style_image_height = style_image.size
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ ìœ„ì¹˜ (ì¢Œì¸¡ ì¤‘ì•™ì— ë°°ì¹˜)
+    # position = (0, (background_height - style_image_height) // 2)
+    position = (10, 10)
+    background.paste(style_image, position)
+
+    # í…ìŠ¤íŠ¸ ì¶”ê°€
+    draw = ImageDraw.Draw(background)
+    text = "".join(strList)
+    font = ImageFont.truetype("arial.ttf", 36)  # í°íŠ¸ í¬ê¸° ì¡°ì ˆ
+    # í…ìŠ¤íŠ¸ í¬ê¸° ê³„ì‚°
+    text_bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+    text_position = (style_image_width + 50, (background_height - text_height) // 2)
+    draw.text(text_position, text, fill='black', font=font)  # í°ìƒ‰ ë°°ê²½ì´ë¯€ë¡œ ê²€ì€ìƒ‰ í…ìŠ¤íŠ¸ ì‚¬ìš©
+
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ íŒŒì¼ë¡œ ì €ì¥
+    background.save('newCoverPage/result2.jpg')
 ################################
-    # ÀÌ¹ÌÁö ¿­±â
-    image = Image.open('styleTransfer/styled_result_image2.jpg')
-    
-    # ÀÌ¹ÌÁö¿¡ ÅØ½ºÆ® Ãß°¡
-    draw = ImageDraw.Draw(image)
-    text = ""
-    for ch in strList:
-        text += ch
-    font = ImageFont.truetype("arial.ttf", 36)  # ÆùÆ®¿Í Å©±â ¼³Á¤
-    draw.text((50, 50), text, fill='white', font=font)  # ÅØ½ºÆ® À§Ä¡¿Í ½ºÅ¸ÀÏ ¼³Á¤
-    
-    # ¼öÁ¤µÈ ÀÌ¹ÌÁö ÀúÀå
-    image.save('newCoverPage/result2.jpg')
-################################
-    # ÀÌ¹ÌÁö ¿­±â
-    image = Image.open('styleTransfer/styled_result_image3.jpg')
-    
-    # ÀÌ¹ÌÁö¿¡ ÅØ½ºÆ® Ãß°¡
-    draw = ImageDraw.Draw(image)
-    text = ""
-    for ch in strList:
-        text += ch
-    font = ImageFont.truetype("arial.ttf", 36)  # ÆùÆ®¿Í Å©±â ¼³Á¤
-    draw.text((50, 50), text, fill='white', font=font)  # ÅØ½ºÆ® À§Ä¡¿Í ½ºÅ¸ÀÏ ¼³Á¤
-    
-    # ¼öÁ¤µÈ ÀÌ¹ÌÁö ÀúÀå
-    image.save('newCoverPage/result3.jpg')
-################################
-    # ÀÌ¹ÌÁö ¿­±â
-    image = Image.open('styleTransfer/styled_result_image4.jpg')
-    
-    # ÀÌ¹ÌÁö¿¡ ÅØ½ºÆ® Ãß°¡
-    draw = ImageDraw.Draw(image)
-    text = ""
-    for ch in strList:
-        text += ch
-    font = ImageFont.truetype("arial.ttf", 36)  # ÆùÆ®¿Í Å©±â ¼³Á¤
-    draw.text((50, 50), text, fill='white', font=font)  # ÅØ½ºÆ® À§Ä¡¿Í ½ºÅ¸ÀÏ ¼³Á¤
-    
-    # ¼öÁ¤µÈ ÀÌ¹ÌÁö ÀúÀå
-    image.save('newCoverPage/result4.jpg')
-    
+    style_image = Image.open('styleTransfer/styled_result_image3.jpg')
+
+    # í°ìƒ‰ ë°°ê²½ ì´ë¯¸ì§€ ìƒì„± (300x1500)
+    background_width = 1500
+    background_height = 300
+    background = Image.new('RGB', (background_width, background_height), 'white')
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ í¬ê¸°
+    style_image_width, style_image_height = style_image.size
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ ìœ„ì¹˜ (ì¢Œì¸¡ ì¤‘ì•™ì— ë°°ì¹˜)
+    # position = (0, (background_height - style_image_height) // 2)
+    position = (10, 10)
+    background.paste(style_image, position)
+
+    # í…ìŠ¤íŠ¸ ì¶”ê°€
+    draw = ImageDraw.Draw(background)
+    text = "".join(strList)
+    font = ImageFont.truetype("arial.ttf", 36)  # í°íŠ¸ í¬ê¸° ì¡°ì ˆ
+    # í…ìŠ¤íŠ¸ í¬ê¸° ê³„ì‚°
+    text_bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+    text_position = (style_image_width + 50, (background_height - text_height) // 2)
+    draw.text(text_position, text, fill='black', font=font)  # í°ìƒ‰ ë°°ê²½ì´ë¯€ë¡œ ê²€ì€ìƒ‰ í…ìŠ¤íŠ¸ ì‚¬ìš©
+
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ íŒŒì¼ë¡œ ì €ì¥
+    background.save('newCoverPage/result3.jpg')
+
+
+    ################################
+    style_image = Image.open('styleTransfer/styled_result_image4.jpg')
+
+    # í°ìƒ‰ ë°°ê²½ ì´ë¯¸ì§€ ìƒì„± (300x1500)
+    background_width = 1500
+    background_height = 300
+    background = Image.new('RGB', (background_width, background_height), 'white')
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ í¬ê¸°
+    style_image_width, style_image_height = style_image.size
+
+    # ìŠ¤íƒ€ì¼ ì´ë¯¸ì§€ ìœ„ì¹˜ (ì¢Œì¸¡ ì¤‘ì•™ì— ë°°ì¹˜)
+    # position = (0, (background_height - style_image_height) // 2)
+    position = (10, 10)
+    background.paste(style_image, position)
+
+    # í…ìŠ¤íŠ¸ ì¶”ê°€
+    draw = ImageDraw.Draw(background)
+    text = "".join(strList)
+    font = ImageFont.truetype("arial.ttf", 36)  # í°íŠ¸ í¬ê¸° ì¡°ì ˆ
+    # í…ìŠ¤íŠ¸ í¬ê¸° ê³„ì‚°
+    text_bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+    text_position = (style_image_width + 50, (background_height - text_height) // 2)
+    draw.text(text_position, text, fill='black', font=font)  # í°ìƒ‰ ë°°ê²½ì´ë¯€ë¡œ ê²€ì€ìƒ‰ í…ìŠ¤íŠ¸ ì‚¬ìš©
+
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ íŒŒì¼ë¡œ ì €ì¥
+    background.save('newCoverPage/result4.jpg')
 
 
