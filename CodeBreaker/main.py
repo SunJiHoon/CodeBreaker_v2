@@ -4,10 +4,7 @@ def makingModelH5():
 
 def makingCover():
     # codebreaker.py
-    # from getImage import edge_detection
-    from getImage import projection
     import cv2
-
     img_path = 'userImage/userInputImage_4.jpg'
     img = cv2.imread(img_path)
 
