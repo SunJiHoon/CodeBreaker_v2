@@ -1,3 +1,18 @@
+import requests
+from dotenv import load_dotenv
+import openai
+from openai import OpenAI
+import os
+
+def load_env_variables():
+    # .env 파일로부터 환경변수 로드
+    load_dotenv()
+
+def get_api_key():
+    # 환경변수에서 API_KEY 가져오기
+    return os.getenv('API_KEY')
+
+
 def makingModelH5():
     from modelGenerator import modelGenerator
     modelGenerator.doLearning()
@@ -26,15 +41,46 @@ def makingCover():
     from imageDetection import imageDetection
     charLi1 = imageDetection.doTheImageClassficationByList(chracterImageLi_1)
     charLi2 = imageDetection.doTheImageClassficationByList(chracterImageLi_2)
-    print(charLi1)
-    print(charLi2)
+    # print(charLi1)
+    # print(charLi2)
 
+    charLi2 = getGPTList(charLi1, charLi2)
+    charLi2 = list(charLi2)
+    newCharLi = charLi1 + [':'] + charLi2
     # finally combining
     from imageCombiner import combine
-    combine.drawImagewithText(charLi1)
+    combine.drawImagewithText(newCharLi)
+
+
+# GPT 모델에 요청 보내는 함수
+def get_gpt_response(text):
+    # 환경변수 로드
+    load_env_variables()
+
+    # API 키 가져오기
+    api_key = get_api_key()
+
+    client = OpenAI(
+        api_key=api_key,
+    )
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": text}]
+    )
+    return response.choices[0].message.content.strip()
+
+
+# getGPTList 함수
+def getGPTList(strList1, strList2):
+    region = "".join(strList1)
+    text = "".join(strList2)
+    text = "Please write a promotional article about an "+ region + " famous for " + text + " in about 20 characters."
+    gpt_response = get_gpt_response(text)
+    return gpt_response
 
 
 if __name__ == '__main__':
+
     print("Choose a function to execute:")
     print("1: makingModelH5")
     print("2: makingCover")

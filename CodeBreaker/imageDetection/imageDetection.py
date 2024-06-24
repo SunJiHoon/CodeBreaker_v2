@@ -114,7 +114,7 @@ def doTheImageClassficationByList(chracterImageLi):
         #     charList.append(',')
 
 
-        if len(charList) > 0 and white_pixel_ratio > 0.7:
+        if len(charList) > 0 and white_pixel_ratio > 0.5:
             # charList.pop()
             break
         charList.append(chr(96 + max_index))
