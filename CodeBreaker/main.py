@@ -4,21 +4,23 @@ def makingModelH5():
 
 def makingCover():
     # codebreaker.py
-    from getImage import edge_detection
+    # from getImage import edge_detection
     from getImage import projection
-    # import cv2
-    vertices, img = edge_detection.detect_vertex('userImage/userInputImage_1_withfloor.jpg')
-    # vertices, img = edge_detection.detect_vertex('userImage/userInputImage_2_withfloor.jpg')
-    # vertices, img = edge_detection.detect_vertex('userImage/userInputImage_3_withfloor.jpg')
-    img_result = projection.perspective_projection(vertices, img)
+    import cv2
+
+    img_path = 'userImage/userInputImage_4.jpg'
+    img = cv2.imread(img_path)
+
     # picture style transfer
     from styleTransfer import getUserPicture
-    userImage = getUserPicture.getUserImage(img_result)  # temp_userPicture made
+    # userImage = getUserPicture.getUserImage(img_result)  # temp_userPicture made
+    userImage = getUserPicture.getUserImage(img)  # temp_userPicture made
     from styleTransfer import styleTransfer
     styleTransfer.doTransferwithUserImage()  # temp_userPicture util, styleTransfer/styled_result_image1,2,3,4 made
     # get character image list 7*4
     from dividor import chracterDividor
-    chracterImageLi = chracterDividor.chracterDividor(img_result)  # it will generator imagle List
+    # chracterImageLi = chracterDividor.chracterDividor(img_result)  # it will generator imagle List
+    chracterImageLi = chracterDividor.chracterDividor(img)  # it will generator imagle List
     # charater classfication and get character list
     from imageDetection import imageDetection
     charLi = imageDetection.doTheImageClassficationByList(chracterImageLi)
@@ -46,13 +48,15 @@ def doAddingTest():
 
 
 if __name__ == '__main__':
-    #1
-    # makingModelH5()
+    print("Choose a function to execute:")
+    print("1: makingModelH5")
+    print("2: makingCover")
 
-    #2
-    makingCover()
+    choice = input("Enter the number of the function to execute: ")
 
-    #3
-    # adding test
-    # doAddingTest()
-
+    if choice == '1':
+        makingModelH5()
+    elif choice == '2':
+        makingCover()
+    else:
+        print("Invalid choice. Please enter a number 1 or 2.")
