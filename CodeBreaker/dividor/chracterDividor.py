@@ -1,11 +1,11 @@
 import cv2
-from getImage import projection
+# from getImage import projection
 
 def chracterDividor(img_result):
     width = 100*5  # to be resized
     height = 141*5  
-    #resized_image = cv2.resize(img_result, (width, height))
-    resized_image = projection.resize(img_result, height, width)
+    resized_image = cv2.resize(img_result, (width, height))
+    # resized_image = projection.resize(img_result, height, width)
 
     #cv2.imshow("resized_Image", resized_image)
     #cv2.waitKey()

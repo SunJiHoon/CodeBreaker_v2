@@ -13,17 +13,25 @@ def makingCover():
     userImage = getUserPicture.getUserImage(img)  # temp_userPicture made
     from styleTransfer import styleTransfer
     styleTransfer.doTransferwithUserImage()  # temp_userPicture util, styleTransfer/styled_result_image1,2,3,4 made
+
     # get character image list 7*4
     from dividor import chracterDividor
     # chracterImageLi = chracterDividor.chracterDividor(img_result)  # it will generator imagle List
     chracterImageLi = chracterDividor.chracterDividor(img)  # it will generator imagle List
+
+    chracterImageLi_1 = chracterImageLi[0:14]
+    chracterImageLi_2 = chracterImageLi[14:28]
+
     # charater classfication and get character list
     from imageDetection import imageDetection
-    charLi = imageDetection.doTheImageClassficationByList(chracterImageLi)
-    print(charLi)
+    charLi1 = imageDetection.doTheImageClassficationByList(chracterImageLi_1)
+    charLi2 = imageDetection.doTheImageClassficationByList(chracterImageLi_2)
+    print(charLi1)
+    print(charLi2)
+
     # finally combining
     from imageCombiner import combine
-    combine.drawImagewithText(charLi)
+    combine.drawImagewithText(charLi1)
 
 
 if __name__ == '__main__':

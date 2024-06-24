@@ -16,44 +16,44 @@ def imageSplitAndRecognize():#tino
     image_path = 'imageDetection/TestImage/testImage.jpg' #plz make image and test
 
     
-    #ÀÌ¹ÌÁö ¸®½ºÆ®¸¸µé±â
+    #ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½
     #make image list
     imageList = []
     
     
-    #for¹®À¸·Î ÀÌ¹ÌÁö ¹è¿­À» model¿¡ Åë°ú½ÃÅ°¸é¼­ °ª ¾ò±â
+    #forï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ modelï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½é¼­ ï¿½ï¿½ ï¿½ï¿½ï¿½
     loaded_model = keras.models.load_model('imageDetection/mnist_model.h5')
 
 
-    #¹«½¼ ±ÛÀÚµéÀÎÁö Ãâ·ÂÇÏ±â
+    #ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
     print(characterList)
     
 
-# 1 ÀÌ¹ÌÁö Å©±â Á¶Á¤ ÇÔ¼ö, 2 ÁÂ¿ì´ëÄª, 3 ÀÌ¹ÌÁö ¿ŞÂÊÀ¸·Î 90µµ È¸Àü, 4 ÀÌ¹ÌÁö È¸»öÀ¸·Î ÀüÈ¯,  5 ÀÌ¹ÌÁö numpy·Î ¸¸µé±â
-#    expectVal = loaded_model.predict(image_data.reshape(1, 28, 28))°¡ ½ÇÇàµÇ´ÂÁö ±¸Çö #±âÈÆ&³çÁØ
+# 1 ï¿½Ì¹ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½, 2 ï¿½Â¿ï¿½ï¿½Äª, 3 ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 90ï¿½ï¿½ È¸ï¿½ï¿½, 4 ï¿½Ì¹ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯,  5 ï¿½Ì¹ï¿½ï¿½ï¿½ numpyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+#    expectVal = loaded_model.predict(image_data.reshape(1, 28, 28))ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ #ï¿½ï¿½ï¿½ï¿½&ï¿½ï¿½ï¿½ï¿½
 
 def doTheImageTest():
-    # ÇöÀç ½ºÅ©¸³Æ® ÆÄÀÏÀÇ µğ·ºÅä¸®¸¦ ±âÁØÀ¸·Î »ó´ë °æ·Î »ı¼º
+    # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     loaded_model = keras.models.load_model('imageDetection/mnist_model.h5')
     
-    # JPG ÀÌ¹ÌÁö ·Îµå
+    # JPG ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     image_path = 'imageDetection/TestImage/whiteA.jpg'
     image = Image.open(image_path)
 
-    # ÀÌ¹ÌÁö Å©±â Á¶Á¤
+    # ï¿½Ì¹ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     image = image.resize((28, 28))
     
-    #ÁÂ¿ì´ëÄª½ÃÅ°±â
+    #ï¿½Â¿ï¿½ï¿½Äªï¿½ï¿½Å°ï¿½ï¿½
     flipped_image = image.transpose(Image.FLIP_LEFT_RIGHT)
-    # ÀÌ¹ÌÁö¸¦ ¿ŞÂÊÀ¸·Î 90µµ È¸Àü
+    # ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 90ï¿½ï¿½ È¸ï¿½ï¿½
     rotated_image = flipped_image.rotate(90)
     image = rotated_image
     
-    # ÀÌ¹ÌÁö¸¦ Èæ¹éÀ¸·Î º¯È¯
-    image = image.convert('L')  # 'L'Àº Èæ¹é ¸ğµåÀÔ´Ï´Ù.
+    # ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+    image = image.convert('L')  # 'L'ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 
-    # ÀÌ¹ÌÁö¸¦ NumPy ¹è¿­·Î º¯È¯ (ºÎµ¿ ¼Ò¼öÁ¡À¸·Î º¯È¯)
+    # ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ NumPy ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½È¯ (ï¿½Îµï¿½ ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯)
     image_data = np.array(image, dtype=np.float32) / 255.0
     for i in range(28):
         for j in range(28):
@@ -70,35 +70,37 @@ def doTheImageTest():
 
 def doTheImageClassficationByList(chracterImageLi):
     charList = []
-    # ÇöÀç ½ºÅ©¸³Æ® ÆÄÀÏÀÇ µğ·ºÅä¸®¸¦ ±âÁØÀ¸·Î »ó´ë °æ·Î »ı¼º
+    # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     loaded_model = keras.models.load_model('imageDetection/mnist_model.h5')
     for image in chracterImageLi:
         cv2.imwrite('temp.jpg', image)
         
-        # JPG ÀÌ¹ÌÁö ·Îµå
+        # JPG ì´ë¯¸ì§€ ì—´ê¸°
         image_path = 'temp.jpg'
         image = Image.open(image_path)
-        # ÀÌ¹ÌÁö Å©±â Á¶Á¤
+        # ì´ë¯¸ì§€ í¬ê¸° ì¡°ì •
         image = image.resize((28, 28))
-        # cropÇÑ ºÎºĞÀ» resize
+        # ì¢Œìš° ë°˜ì „
         #image = cv2.resize(image, (28, 28))
 
-        #ÁÂ¿ì´ëÄª½ÃÅ°±â
+        # ì´ë¯¸ì§€ë¥¼ 90ë„ íšŒì „
         flipped_image = image.transpose(Image.FLIP_LEFT_RIGHT)
-        # ÀÌ¹ÌÁö¸¦ ¿ŞÂÊÀ¸·Î 90µµ È¸Àü
+        # ì´ë¯¸ì§€ë¥¼ 90ë„ íšŒì „
         rotated_image = flipped_image.rotate(90)
         image = rotated_image
-        # ÀÌ¹ÌÁö¸¦ Èæ¹éÀ¸·Î º¯È¯
-        image = image.convert('L')  # 'L'Àº Èæ¹é ¸ğµåÀÔ´Ï´Ù.
-        # ÀÌ¹ÌÁö¸¦ NumPy ¹è¿­·Î º¯È¯ (ºÎµ¿ ¼Ò¼öÁ¡À¸·Î º¯È¯)
+        # ì´ë¯¸ì§€ë¥¼ ê·¸ë ˆì´ìŠ¤ì¼€ì¼ë¡œ ë³€í™˜
+        image = image.convert('L')  # 'L'ì€ ê·¸ë ˆì´ìŠ¤ì¼€ì¼ ëª¨ë“œ
+        # ì´ë¯¸ì§€ë¥¼ NumPy ë°°ì—´ë¡œ ë³€í™˜ (0~1ë¡œ ì •ê·œí™”)
         image_data = np.array(image, dtype=np.float32) / 255.0
         for i in range(28):
             for j in range(28):
                 image_data[i][j] = 1.0 - image_data[i][j]
         #plt.imshow(image_data, cmap='gray')
         #plt.show()
-        
+        # ê²€ì •ìƒ‰ í”½ì…€ ë¹„ìœ¨ ê³„ì‚°
+        white_pixel_ratio = np.mean(image_data > 0.5)
+
         expectVal = loaded_model.predict(image_data.reshape(1, 28, 28))
         print(expectVal)
         max_index = np.argmax(expectVal)
@@ -106,9 +108,14 @@ def doTheImageClassficationByList(chracterImageLi):
         print("index info : ", end = '')
         print(max_index)
         print()
-        
-        if len(charList) > 0 and charList[-1] == 'z' and chr(96 + max_index) == 'z':
-            charList.pop()
+
+        # í°ìƒ‰ í”½ì…€ ë¹„ìœ¨ì´ ë†’ì€ ê²½ìš° ',' ì¶”ê°€
+        # if black_pixel_ratio < 0.2:  # ì—¬ê¸°ì„œ 0.5ëŠ” ì„ê³„ê°’ìœ¼ë¡œ ì¡°ì ˆ ê°€ëŠ¥
+        #     charList.append(',')
+
+
+        if len(charList) > 0 and white_pixel_ratio > 0.7:
+            # charList.pop()
             break
         charList.append(chr(96 + max_index))
     return charList        
