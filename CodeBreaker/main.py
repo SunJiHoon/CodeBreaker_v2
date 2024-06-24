@@ -26,23 +26,6 @@ def makingCover():
     combine.drawImagewithText(charLi)
 
 
-def doAddingTest():
-    import cv2
-    #cv2 설치 안 될 경우 -> pip install opencv-python 로 설치하는 것을 추천함
-
-    print("abc")
-    from getImage import edge_detection
-    from getImage import projection
-    vertices, img = edge_detection.detect_vertex('origin_imapge_3.png')
-    result = [[10, 10], [200, 1100], [1300, 10], [1100, 1100]]
-    #
-    img_result = projection.perspective_projection(result, img)
-    cv2.imshow("cat", img_result)
-    cv2.waitKey()
-    cv2.destroyAllWindows()
-    cv2.imwrite('cat.jpg', img_result)
-
-
 if __name__ == '__main__':
     print("Choose a function to execute:")
     print("1: makingModelH5")
