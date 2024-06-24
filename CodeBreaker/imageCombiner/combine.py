@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import textwrap
 
 
-def drawImagewithText(strList, openAt, saveAt):
+def drawImagewithTextDescriptiveAboutOpenAndSave(strList, openAt, saveAt):
     # 원본 이미지 불러오기
     # style_image = Image.open('styleTransfer/styled_result_image1.jpg')
     style_image = Image.open(openAt)
@@ -45,9 +45,9 @@ def drawImagewithText(strList, openAt, saveAt):
     background.save(saveAt)
 
 def drawImagewithText(strList):
-    drawImagewithText(strList, 'styleTransfer/styled_result_image1.jpg', 'newCoverPage/result1.jpg')
-    drawImagewithText(strList, 'styleTransfer/styled_result_image2.jpg', 'newCoverPage/result2.jpg')
-    drawImagewithText(strList, 'styleTransfer/styled_result_image3.jpg', 'newCoverPage/result3.jpg')
-    drawImagewithText(strList, 'styleTransfer/styled_result_image4.jpg', 'newCoverPage/result4.jpg')
+    drawImagewithTextDescriptiveAboutOpenAndSave(strList, 'styleTransfer/styled_result_image1.jpg', 'newCoverPage/result1.jpg')
+    drawImagewithTextDescriptiveAboutOpenAndSave(strList, 'styleTransfer/styled_result_image2.jpg', 'newCoverPage/result2.jpg')
+    drawImagewithTextDescriptiveAboutOpenAndSave(strList, 'styleTransfer/styled_result_image3.jpg', 'newCoverPage/result3.jpg')
+    drawImagewithTextDescriptiveAboutOpenAndSave(strList, 'styleTransfer/styled_result_image4.jpg', 'newCoverPage/result4.jpg')
 
 
