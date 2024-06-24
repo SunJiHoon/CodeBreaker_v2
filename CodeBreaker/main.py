@@ -41,6 +41,9 @@ def makingCover():
     from imageDetection import imageDetection
     charLi1 = imageDetection.doTheImageClassficationByList(chracterImageLi_1)
     charLi2 = imageDetection.doTheImageClassficationByList(chracterImageLi_2)
+    print(charLi1)
+    print(charLi2)
+
     # print(charLi1)
     # print(charLi2)
 
