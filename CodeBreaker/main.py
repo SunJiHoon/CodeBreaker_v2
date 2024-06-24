@@ -63,6 +63,6 @@ if __name__ == '__main__':
         #userImage 디렉터리에 변형할 사진이 존재하는지 확인할 것
         makingCover()
         # 실행 후 볼 것
-        # 1. 생성된 자료들을 확인 할 것. newCoverPage 디렉터리에 네 개의 사진이 생성된다.
+        # 1. 생성된 자료들을 확인 할 것. newCoverPage 디렉터리에 네 개의 사진이 생성된다. 결과물이 잘 생성되었는지 체크할 것.
     else:
         print("Invalid choice. Please enter a number 1 or 2.")
