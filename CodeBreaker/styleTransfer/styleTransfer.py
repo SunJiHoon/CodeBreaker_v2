@@ -3,92 +3,89 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow_hub as hub
 
-# ÀÌ¹ÌÁö¸¦ ·ÎµåÇÏ°í ÀüÃ³¸®ÇÏ´Â ÇÔ¼ö
+# ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½Ï°ï¿½ ï¿½ï¿½Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 def load_image(image_path):
     image = tf.io.read_file(image_path)
     image = tf.image.decode_image(image, channels=3)
     image = tf.image.convert_image_dtype(image, tf.float32)
-    image = tf.image.resize(image, [224, 224])  # ÀÌ¹ÌÁö Å©±â Á¶Àı
+    image = tf.image.resize(image, [224, 224])  # ï¿½Ì¹ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     image = image[tf.newaxis, :]
     return image
 
 
 def doTransfer():
-    # ÀÌ¹ÌÁö °æ·Î ¼³Á¤
-    content_image_path = 'styleTransfer/content_image_5.jpg'  # ´ë»ó ÀÌ¹ÌÁö
-    style_image_path = 'styleTransfer/style_image_5.jpg'      # ½ºÅ¸ÀÏ ÀÌ¹ÌÁö
+    # ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    content_image_path = 'styleTransfer/content_image_5.jpg'  # ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    style_image_path = 'styleTransfer/style_image_5.jpg'      # ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
     
-    # ÀÌ¹ÌÁö¸¦ ·ÎµåÇÏ°í ÀüÃ³¸®
+    # ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½Ï°ï¿½ ï¿½ï¿½Ã³ï¿½ï¿½
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
     
-    # TF-Hub¿¡¼­ »çÀü ÈÆ·ÃµÈ ½ºÅ¸ÀÏ Æ®·£½ºÆÛ ¸ğµ¨ ·Îµå
+    # TF-Hubï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·Ãµï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Îµï¿½
     hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
     
-    # ½ºÅ¸ÀÏ Æ®·£½ºÆÛ Àû¿ë
+    # ï¿½ï¿½Å¸ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # Â÷¿ø Ãà¼Ò
+    stylized_image = tf.squeeze(stylized_image)  # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     
-    # °á°ú ÀÌ¹ÌÁö Ãâ·Â
+    # ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     plt.imshow(stylized_image)
     plt.axis('off')
     plt.show()
     
-    # °á°ú ÀÌ¹ÌÁö ÀúÀå
+    # ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     tf.keras.utils.save_img('styleTransfer/result_image.jpg', stylized_image.numpy())
     
 def doTransferwithUserImage():
-    # TF-Hub¿¡¼­ »çÀü ÈÆ·ÃµÈ ½ºÅ¸ÀÏ Æ®·£½ºÆÛ ¸ğµ¨ ·Îµå
+    # TF-Hubì—ì„œ Magenta ìŠ¤íƒ€ì¼ ì „ì†¡ ëª¨ë¸ì„ ë¡œë“œí•©ë‹ˆë‹¤.
     hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
     #################
-    # ÀÌ¹ÌÁö °æ·Î ¼³Á¤
-    content_image_path = 'temp_userPicture.jpg'  # ´ë»ó ÀÌ¹ÌÁö
-    style_image_path = 'styleTransfer/style_image.jpg'      # ½ºÅ¸ÀÏ ÀÌ¹ÌÁö
-    # ÀÌ¹ÌÁö¸¦ ·ÎµåÇÏ°í ÀüÃ³¸®
+    # ì´ë¯¸ì§€ ê²½ë¡œ ì„¤ì •
+    content_image_path = 'temp_userPicture.jpg'  # ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    style_image_path = 'styleTransfer/style_image.jpg'      # ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    # ì´ë¯¸ì§€ë¥¼ ë¡œë“œí•˜ê³  ì „ì²˜ë¦¬í•©ë‹ˆë‹¤.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
-    # ½ºÅ¸ÀÏ Æ®·£½ºÆÛ Àû¿ë
+    # ìŠ¤íƒ€ì¼ transferì„ ìˆ˜í–‰í•©ë‹ˆë‹¤.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # Â÷¿ø Ãà¼Ò
-    # °á°ú ÀÌ¹ÌÁö ÀúÀå
+    stylized_image = tf.squeeze(stylized_image)  # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
     tf.keras.utils.save_img('styleTransfer/styled_result_image1.jpg', stylized_image.numpy())
     ############################################
-    # ÀÌ¹ÌÁö °æ·Î ¼³Á¤
-    content_image_path = 'temp_userPicture.jpg'  # ´ë»ó ÀÌ¹ÌÁö
-    style_image_path = 'styleTransfer/style_image2.jpg'      # ½ºÅ¸ÀÏ ÀÌ¹ÌÁö
-    # ÀÌ¹ÌÁö¸¦ ·ÎµåÇÏ°í ÀüÃ³¸®
+    # ì´ë¯¸ì§€ ê²½ë¡œ ì„¤ì •
+    content_image_path = 'temp_userPicture.jpg'  # ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    style_image_path = 'styleTransfer/style_image2.jpg'      # ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    # ì´ë¯¸ì§€ë¥¼ ë¡œë“œí•˜ê³  ì „ì²˜ë¦¬í•©ë‹ˆë‹¤.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
-    # ½ºÅ¸ÀÏ Æ®·£½ºÆÛ Àû¿ë
+    # ìŠ¤íƒ€ì¼ transferì„ ìˆ˜í–‰í•©ë‹ˆë‹¤.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # Â÷¿ø Ãà¼Ò
-    # °á°ú ÀÌ¹ÌÁö Ãâ·Â
-    # °á°ú ÀÌ¹ÌÁö ÀúÀå
+    stylized_image = tf.squeeze(stylized_image)  # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
     tf.keras.utils.save_img('styleTransfer/styled_result_image2.jpg', stylized_image.numpy())
     ############################################
-    # ÀÌ¹ÌÁö °æ·Î ¼³Á¤
-    content_image_path = 'temp_userPicture.jpg'  # ´ë»ó ÀÌ¹ÌÁö
-    style_image_path = 'styleTransfer/style_image3.jpg'      # ½ºÅ¸ÀÏ ÀÌ¹ÌÁö
-    # ÀÌ¹ÌÁö¸¦ ·ÎµåÇÏ°í ÀüÃ³¸®
+    # ì´ë¯¸ì§€ ê²½ë¡œ ì„¤ì •
+    content_image_path = 'temp_userPicture.jpg'  # ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    style_image_path = 'styleTransfer/style_image3.jpg'      # ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    # ì´ë¯¸ì§€ë¥¼ ë¡œë“œí•˜ê³  ì „ì²˜ë¦¬í•©ë‹ˆë‹¤.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
-    # ½ºÅ¸ÀÏ Æ®·£½ºÆÛ Àû¿ë
+    # ìŠ¤íƒ€ì¼ transferì„ ìˆ˜í–‰í•©ë‹ˆë‹¤.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # Â÷¿ø Ãà¼Ò
-    # °á°ú ÀÌ¹ÌÁö Ãâ·Â
-    # °á°ú ÀÌ¹ÌÁö ÀúÀå
+    stylized_image = tf.squeeze(stylized_image)  # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
     tf.keras.utils.save_img('styleTransfer/styled_result_image3.jpg', stylized_image.numpy())
     ############################################
-    # ÀÌ¹ÌÁö °æ·Î ¼³Á¤
-    content_image_path = 'temp_userPicture.jpg'  # ´ë»ó ÀÌ¹ÌÁö
-    style_image_path = 'styleTransfer/style_image4.jpg'      # ½ºÅ¸ÀÏ ÀÌ¹ÌÁö
-    # ÀÌ¹ÌÁö¸¦ ·ÎµåÇÏ°í ÀüÃ³¸®
+    # ì´ë¯¸ì§€ ê²½ë¡œ ì„¤ì •
+    content_image_path = 'temp_userPicture.jpg'  # ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    style_image_path = 'styleTransfer/style_image4.jpg'      # ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    # ì´ë¯¸ì§€ë¥¼ ë¡œë“œí•˜ê³  ì „ì²˜ë¦¬í•©ë‹ˆë‹¤.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
-    # ½ºÅ¸ÀÏ Æ®·£½ºÆÛ Àû¿ë
+    # ìŠ¤íƒ€ì¼ transferì„ ìˆ˜í–‰í•©ë‹ˆë‹¤.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # Â÷¿ø Ãà¼Ò
-    # °á°ú ÀÌ¹ÌÁö Ãâ·Â
-    # °á°ú ÀÌ¹ÌÁö ÀúÀå
+    stylized_image = tf.squeeze(stylized_image)  # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    # ê²°ê³¼ ì´ë¯¸ì§€ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
     tf.keras.utils.save_img('styleTransfer/styled_result_image4.jpg', stylized_image.numpy())
     
