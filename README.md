@@ -46,10 +46,15 @@ Pycharm으로 프로젝트 열기
  
 
 파일들 위치 시키기
+
 .env, emnist-letters-test.csv, emnist-letters-train.csv 세 파일을 다운 받아서 해당 디렉터리에 위치 시킵니다.
+
 CodeBreaker_v2/CodeBreaker/.env
+
 CodeBreaker_v2/CodeBreaker/modelGenerator/archive/emnist-letters-test.csv
+
 CodeBreaker_v2/CodeBreaker/modelGenerator/archive/emnist-letters-train.csv
+
 
 ![image](https://github.com/SunJiHoon/CodeBreaker_v2/assets/46434398/6994f075-e031-4294-9a9c-688e4410d15f)
  
