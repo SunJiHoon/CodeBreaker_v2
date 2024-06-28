@@ -42,50 +42,50 @@ def doTransferwithUserImage():
     hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
     #################
     # 이미지 경로 설정
-    content_image_path = 'temp_userPicture.jpg'  # ��� �̹���
-    style_image_path = 'styleTransfer/style_image.jpg'      # ��Ÿ�� �̹���
+    content_image_path = 'temp_userPicture.jpg'
+    style_image_path = 'styleTransfer/style_image.jpg'
     # 이미지를 로드하고 전처리합니다.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
     # 스타일 transfer을 수행합니다.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # ���� ���
+    stylized_image = tf.squeeze(stylized_image)
     # 결과 이미지를 저장합니다.
     tf.keras.utils.save_img('styleTransfer/styled_result_image1.jpg', stylized_image.numpy())
     ############################################
     # 이미지 경로 설정
-    content_image_path = 'temp_userPicture.jpg'  # ��� �̹���
-    style_image_path = 'styleTransfer/style_image2.jpg'      # ��Ÿ�� �̹���
+    content_image_path = 'temp_userPicture.jpg'
+    style_image_path = 'styleTransfer/style_image2.jpg'
     # 이미지를 로드하고 전처리합니다.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
     # 스타일 transfer을 수행합니다.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # ���� ���
+    stylized_image = tf.squeeze(stylized_image)
     # 결과 이미지를 저장합니다.
     tf.keras.utils.save_img('styleTransfer/styled_result_image2.jpg', stylized_image.numpy())
     ############################################
     # 이미지 경로 설정
-    content_image_path = 'temp_userPicture.jpg'  # ��� �̹���
-    style_image_path = 'styleTransfer/style_image3.jpg'      # ��Ÿ�� �̹���
+    content_image_path = 'temp_userPicture.jpg'
+    style_image_path = 'styleTransfer/style_image3.jpg'
     # 이미지를 로드하고 전처리합니다.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
     # 스타일 transfer을 수행합니다.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # ���� ���
+    stylized_image = tf.squeeze(stylized_image)
     # 결과 이미지를 저장합니다.
     tf.keras.utils.save_img('styleTransfer/styled_result_image3.jpg', stylized_image.numpy())
     ############################################
     # 이미지 경로 설정
-    content_image_path = 'temp_userPicture.jpg'  # ��� �̹���
-    style_image_path = 'styleTransfer/style_image4.jpg'      # ��Ÿ�� �̹���
+    content_image_path = 'temp_userPicture.jpg'
+    style_image_path = 'styleTransfer/style_image4.jpg'
     # 이미지를 로드하고 전처리합니다.
     content_image = load_image(content_image_path)
     style_image = load_image(style_image_path)
     # 스타일 transfer을 수행합니다.
     stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-    stylized_image = tf.squeeze(stylized_image)  # ���� ���
+    stylized_image = tf.squeeze(stylized_image)
     # 결과 이미지를 저장합니다.
     tf.keras.utils.save_img('styleTransfer/styled_result_image4.jpg', stylized_image.numpy())
     
