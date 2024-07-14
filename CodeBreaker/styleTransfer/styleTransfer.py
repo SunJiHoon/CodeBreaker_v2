@@ -8,7 +8,8 @@ def load_image(image_path):
     image = tf.io.read_file(image_path)  # 이미지 파일을 읽어옵니다.
     image = tf.image.decode_image(image, channels=3) #binary 이미지를 3차원으로 디코딩
     image = tf.image.convert_image_dtype(image, tf.float32) # 이미지 데이터를 float32 형식으로 변환합니다.
-    image = tf.image.resize(image, [224, 224])   # 이미지 크기를 224x224로 조정합니다.
+    # image = tf.image.resize(image, [224, 224])  # 이미지 크기를 224x224로 조정합니다.
+    image = tf.image.resize(image, [512, 512])  # 이미지 크기를 512x512 조정합니다.
     image = image[tf.newaxis, :] # 배치 차원을 추가합니다.
     return image
 
